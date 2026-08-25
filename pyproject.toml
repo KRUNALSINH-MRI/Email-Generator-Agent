@@ -1,0 +1,31 @@
+[project]
+name = "email-generator"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "KRUNALSINH CHHASATIYA", email = "krunal.chhasatiya@mrisoftware.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "azure-ai-agentserver-invocations>=1.0.0",
+    "azure-identity>=1.25.3",
+    "fastmcp>=3.4.7",
+    "langchain>=1.3.15",
+    "langchain-azure-ai[hosting]>=1.2.8",
+    "langchain-openai>=1.6.0",
+    "langgraph>=1.2.11",
+    "mcp>=1.29.0",
+    "pydantic>=2.13.4",
+    "pytest>=9.1.1",
+    "python-dotenv>=1.2.3",
+    "requests>=2.34.2",
+]
+
+[project.scripts]
+email-generator = "email_generator:main"
+email-generator-agent = "email_generator.hosted_agent:main"
+
+[build-system]
+requires = ["uv_build>=0.12.5,<0.13.0"]
+build-backend = "uv_build"

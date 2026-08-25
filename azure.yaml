@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
+
+name: email-generator
+metadata:
+    template: email-generator
+services:
+    email-generator:
+        project: ./src
+        host: azure.ai.agent
+        language: python
+        uses:
+            - email-generator-foundry
+        env:
+            AZURE_AI_MODEL_DEPLOYMENT_NAME: ${AZURE_AI_MODEL_DEPLOYMENT_NAME}
+            AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT}
+            MCP_SERVER_URL: ${MCP_SERVER_URL}
+        startupCommand: python run_agent.py
+        codeConfiguration:
+            dependencyResolution: remote_build
+            entryPoint: run_agent.py
+            runtime: python_3_14
+        container:
+            resources:
+                cpu: "0.5"
+                memory: 1Gi
+        kind: hosted
+        name: email-generator
+        protocols:
+            - protocol: invocations
+              version: 2.0.0
+    email-generator-foundry:
+        host: azure.ai.project
+        endpoint: https://email-generator-krunal-resource.services.ai.azure.com/api/projects/email-generator-foundry
+    mcp:
+        project: ./mcp_server
+        host: appservice
+        language: python
+        startupCommand: python http_server.py

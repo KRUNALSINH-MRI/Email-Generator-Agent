@@ -1,0 +1,11 @@
+azure-identity
+langchain
+langchain-openai
+langchain-azure-ai[hosting]
+azure-ai-agentserver-invocations
+python-dotenv
+langgraph
+fastmcp
+pydantic
+azure-identity
+requests
