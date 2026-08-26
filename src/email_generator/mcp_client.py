@@ -1,4 +1,6 @@
 import os
+import sys
+from pathlib import Path
 
 from dotenv import load_dotenv
 from fastmcp import Client
@@ -6,7 +8,11 @@ from fastmcp import Client
 
 load_dotenv()
 
-MCP_SERVER_PATH = "mcp_server/server.py"
+_PROJECT_ROOT = Path(__file__).resolve().parents[2]
+
+MCP_SERVER_PATH = str(_PROJECT_ROOT / "mcp_server" / "server.py")
+
+PYTHON_PATH = sys.executable
 
 
 def get_mcp_client():
@@ -32,10 +38,8 @@ def get_mcp_client():
         {
             "mcpServers": {
                 "email_guidelines": {
-                    "command": "uv",
+                    "command": PYTHON_PATH,
                     "args": [
-                        "run",
-                        "python",
                         MCP_SERVER_PATH,
                     ],
                 }
